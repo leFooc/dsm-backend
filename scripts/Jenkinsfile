@@ -11,13 +11,13 @@ pipeline {
             }
         }
         stage('Scan') {
-            tools {
-                jdk "jdk"
-            }
+            // tools {
+            //     jdk "jdk"
+            // }
             environment {
                 scannerHome = tool 'SonarQube' // the name you have given the Sonar Scanner (Global Tool Configuration)
-                jdk = tool name: 'jdk'
-                javahome = "${jdk}/jdk-11.0.2"
+                // jdk = tool name: 'jdk'
+                // javahome = "${jdk}/jdk-11.0.2"
                 SONAR_HOST = """${sh(
                     returnStdout: true,
                     script: 'echo "sonar host:"'
