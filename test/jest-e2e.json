@@ -11,7 +11,7 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "@libs/commons/(.*)": "<rootDir>/../libs/commons/src/$1",
-    "@libs/commons": "<rootDir>/../libs/commons/src"
+    "@libs/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "@libs/common": "<rootDir>/../libs/common/src"
   }
 }

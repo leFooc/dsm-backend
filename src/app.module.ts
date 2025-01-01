@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CommonsModule } from 'libs/common/src';
+import { CommonsModule } from '@libs/common';
 
 @Module({
   imports: [CommonsModule],
