@@ -36,7 +36,7 @@ pipeline {
                     //     // sh 'mvn clean package'
                     //     // sh 'mvn sonar:sonar -Dsonar.projectKey=Project_Backend -Dsonar.host.url=http://xx.xx.xx.xx:9000 -Dsonar.login=xxx'
                     // }
-                    def sonarScanner "${scannerHome}/bin/sonar-scanner"
+                    def sonarScanner = "${scannerHome}/bin/sonar-scanner"
                     sh "$sonarScanner --version"
                     withCredentials([string(credentialsId: 'sonar-test-demo-token', variable: 'token')]) {
                         // some block
