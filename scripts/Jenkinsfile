@@ -15,6 +15,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo "Entering Test step"'
+                sh 'npm run test:cov'
             }
         }
         stage('Scan') {
