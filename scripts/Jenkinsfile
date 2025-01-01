@@ -16,13 +16,13 @@ pipeline {
             //     jdk "jdk"
             // }
             environment {
-                scannerHome = tool 'SonarQube' // the name you have given the Sonar Scanner (Global Tool Configuration)
+                // scannerHome = tool 'SonarQube' // the name you have given the Sonar Scanner (Global Tool Configuration)
                 // jdk = tool name: 'jdk'
                 // javahome = "${jdk}/jdk-11.0.2"
                 SONAR_HOST = "http://172.0.0.2"
             }
             steps {
-                withSonarQubeEnv(installationName: 'SonarQube') {
+                withSonarQubeEnv(installationName: 'SonarQube1') {
 //                sh 'mvn sonar:sonar'
                     sh 'echo "Entering Scan step"'
                     sh "npm run format"
