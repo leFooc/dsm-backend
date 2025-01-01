@@ -20,9 +20,11 @@ pipeline {
                 // jdk = tool name: 'jdk'
                 // javahome = "${jdk}/jdk-11.0.2"
                 SONAR_HOST = "http://172.0.0.2"
+                sonarScanner = "${scannerHome}/bin/sonar-scanner"
             }
-            def sonarScanner = "${scannerHome}/bin/sonar-scanner"
+            
             steps {
+                // def sonarScanner = "${scannerHome}/bin/sonar-scanner"
                 withSonarQubeEnv(installationName: 'SonarQube1') {
 //                sh 'mvn sonar:sonar'
                     sh 'echo "Entering Scan step"'
