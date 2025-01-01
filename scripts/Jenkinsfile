@@ -51,10 +51,14 @@ pipeline {
             }
         }
         stage('Test') {
-            sh 'echo "Entering Test step"'
+            steps {
+                sh 'echo "Entering Test step"'
+            }
         }
         stage('Deploy') {
-            sh 'echo "Entering Deploy step"'
+            steps {
+                sh 'echo "Entering Deploy step"'
+            }
         }
     }
 }
