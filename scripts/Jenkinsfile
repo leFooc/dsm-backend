@@ -12,6 +12,11 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'echo "Entering Test step"'
+            }
+        }
         stage('Scan') {
             // tools {
             //     jdk "jdk"
@@ -53,11 +58,6 @@ pipeline {
                 timeout(time: 60, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'echo "Entering Test step"'
             }
         }
         stage('Deploy') {
