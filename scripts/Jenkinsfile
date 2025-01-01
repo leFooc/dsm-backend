@@ -41,11 +41,12 @@ pipeline {
                     // }
                     
                     sh "$sonarScanner --version"
-                    withCredentials([string(credentialsId: 'sonar-test-demo-token', variable: 'token')]) {
+                    withCredentials([string(credentialsId: 'sonar-test-demo-token', variable: 'token'), string(credentialsId: 'sonarqube-token', variable: 'user_token')]) {
                         // some block
                         sh "$sonarScanner \
                             -Dsonar.host.url=$SONAR_HOST \
-                            -Dsonar.token=$token"
+                            -Dsonar.token=$token \
+                            -Dsonar.login=$user_token"
                     }
                 }
                 timeout(time: 60, unit: 'MINUTES') {
