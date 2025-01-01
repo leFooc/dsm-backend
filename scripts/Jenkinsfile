@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    environment {
+    }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'echo "Entering Build step"'
+                sh 'npm install' 
+                sh 'npm run build'
+            }
+        }
+        stage('Scan') {
+            tools {
+                jdk "jdk"
+            }
+            environment {
+                scannerHome = tool 'SonarQube' // the name you have given the Sonar Scanner (Global Tool Configuration)
+                jdk = tool name: 'jdk'
+                javahome = "${jdk}/jdk-11.0.2"
+                SONAR_HOST = """${sh(
+                    returnStdout: true,
+                    script: 'echo "sonar host:"'
+                )}""" 
+            }
+            steps {
+                withSonarQubeEnv(installationName: 'SonarQube') {
+//                sh 'mvn sonar:sonar'
+                    sh 'echo "Entering Scan step"'
+                    sh "npm run format"
+                    // withEnv(["JAVA_HOME=${ tool 'jdk' }/jdk-11.0.2/","PATH+JAVA=${ tool 'jdk'}/jdk-11.0.2/bin"]) {
+                        
+                    //     sh "echo JDK:   ${jdk}"
+                    //     sh "echo JAVA_HOME:   $JAVA_HOME"
+                    //     // note that simple quote strings are not evaluated by Groovy
+                    //     // substitution is done by shell script using environment
+                    //     // sh '$JAVA_HOME/bin/java -version'
+                    //     // sh 'mvn clean package'
+                    //     // sh 'mvn sonar:sonar -Dsonar.projectKey=Project_Backend -Dsonar.host.url=http://xx.xx.xx.xx:9000 -Dsonar.login=xxx'
+                    // }
+                    withCredentials([string(credentialsId: 'sonar-test-demo-token', variable: 'token')]) {
+                        // some block
+                        sh "sonar-scanner \
+                            -Dsonar.host.url=$SONAR_HOST \
+                            -Dsonar.token=$token"
+                    }
+                }
+                timeout(time: 60, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Test') {
+            sh 'echo "Entering Test step"'
+        }
+        stage('Deploy') {
+            sh 'echo "Entering Deploy step"'
+        }
+    }
+}

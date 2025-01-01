@@ -6,7 +6,7 @@ import { CommonsService } from 'libs/common/src';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly commonsService: CommonsService
+    private readonly commonsService: CommonsService,
   ) {}
 
   @Get()
