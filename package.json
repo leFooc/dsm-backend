@@ -69,8 +69,13 @@
       "<rootDir>/src/",
       "<rootDir>/libs/"
     ],
+    "coveragePathIgnorePatterns": [
+      "\\.module\\.ts",
+      ".\\main.ts",
+      ".\\index.ts"
+    ],
     "moduleNameMapper": {
-      "^@libs/commons(|/.*)$": "<rootDir>/libs/commons/src/$1"
+      "^@libs/common(|/.*)$": "<rootDir>/libs/common/src/$1"
     }
   }
 }
